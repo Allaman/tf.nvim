@@ -1,0 +1,13 @@
+---
+version: "3"
+
+tasks:
+  default:
+    silent: true
+    cmds:
+      - task -l
+
+  test:
+    desc: Test
+    cmds:
+      - nvim --headless -u tests/minimal_init.lua -c "PlenaryBustedDirectory tests" +qa
