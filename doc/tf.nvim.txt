@@ -40,8 +40,8 @@ INSTALLATION                                            *tf.nvim-installation*
 >lua
     {
       "allaman/tf.nvim",
-        opts = {},
-        ft = "terraform"
+      opts = {},
+      ft = "terraform"
     }
 <
 
