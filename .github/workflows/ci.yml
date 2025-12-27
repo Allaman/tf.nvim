@@ -40,7 +40,7 @@ jobs:
           OS=$(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
           [ ! -d tests ] && exit 0
           curl -sLo /tmp/terraform.zip https://releases.hashicorp.com/terraform/1.14.3/terraform_1.14.3_${OS}_amd64.zip
-          unzip -d /usr/local/bin/ /tmp/terraform.zip
+          unzip -o -d /usr/local/bin/ /tmp/terraform.zip terraform
           nvim --headless -u tests/minimal_init.lua -c "PlenaryBustedDirectory tests" +qa
   docs:
     runs-on: ubuntu-latest
