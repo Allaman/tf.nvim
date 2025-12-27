@@ -17,8 +17,6 @@
   </p>
 </div>
 
-# tf.nvim
-
 A Neovim plugin for
 
 - quickly accessing Terraform provider documentation
