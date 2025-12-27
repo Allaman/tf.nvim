@@ -31,7 +31,7 @@ A Neovim plugin for
   - Configurable provider registry for custom/community providers
   - Copy URL to clipboard OR open directly in browser
   - Configurable browser command
-- **View and manage Terraform state** - interactive state browser
+- View and manage Terraform state - interactive state browser
   - Filter, search, and copy Terraform state addresses in-place
   - Delete resources from state with confirmation dialog
 - Run `terraform validate` without leaving Neovim
