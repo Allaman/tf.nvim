@@ -41,8 +41,8 @@ A Neovim plugin for
 ```lua
 {
   "allaman/tf.nvim",
-    opts = {},
-    ft = "terraform"
+  opts = {},
+  ft = "terraform"
 }
 ```
 
