@@ -18,7 +18,6 @@ local function reset_stubs()
   end
 end
 
-
 describe("tf.state_ui helpers", function()
   it("applies filters respecting case sensitivity", function()
     local util = state_ui._test
@@ -38,7 +37,12 @@ describe("tf.state_ui helpers", function()
   it("extracts headline and splits lines", function()
     local util = state_ui._test
     assert.equals("error: boom", util.first_nonempty_line("\n  error: boom\nmore"))
-    assert.equals("Error: Backend initialization required, please run \"terraform init\"", util.first_nonempty_line("╷\n│ Error: Backend initialization required, please run \"terraform init\"\n│ with backend bucket\n╵"))
+    assert.equals(
+      'Error: Backend initialization required, please run "terraform init"',
+      util.first_nonempty_line(
+        '╷\n│ Error: Backend initialization required, please run "terraform init"\n│ with backend bucket\n╵'
+      )
+    )
     assert.are.same({ "one", "two" }, util.split_lines("one\ntwo"))
   end)
 end)

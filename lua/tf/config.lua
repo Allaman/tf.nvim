@@ -48,8 +48,12 @@ local function validate_config(opts)
 
   if opts.state and opts.state.window and opts.state.window.mode then
     if not vim.tbl_contains(valid_modes, opts.state.window.mode) then
-      return false, string.format("Invalid state.window.mode: '%s'. Must be one of: %s",
-        opts.state.window.mode, table.concat(valid_modes, ", "))
+      return false,
+        string.format(
+          "Invalid state.window.mode: '%s'. Must be one of: %s",
+          opts.state.window.mode,
+          table.concat(valid_modes, ", ")
+        )
     end
   end
 
@@ -57,8 +61,12 @@ local function validate_config(opts)
   if opts.doc and opts.doc.default_action then
     local valid_actions = { "copy", "open" }
     if not vim.tbl_contains(valid_actions, opts.doc.default_action) then
-      return false, string.format("Invalid doc.default_action: '%s'. Must be one of: %s",
-        opts.doc.default_action, table.concat(valid_actions, ", "))
+      return false,
+        string.format(
+          "Invalid doc.default_action: '%s'. Must be one of: %s",
+          opts.doc.default_action,
+          table.concat(valid_actions, ", ")
+        )
     end
   end
 

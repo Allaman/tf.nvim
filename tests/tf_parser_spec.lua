@@ -5,8 +5,8 @@ describe("tf.parser.parse_block", function()
   it("detects resource on declaration line", function()
     helpers.with_temp_buffer({
       'resource "aws_instance" "example" {',
-      "  ami           = \"ami-123\"",
-      "  instance_type = \"t2.micro\"",
+      '  ami           = "ami-123"',
+      '  instance_type = "t2.micro"',
       "}",
     }, { 1, 0 }, function()
       local block = parser.parse_block()
@@ -22,8 +22,8 @@ describe("tf.parser.parse_block", function()
   it("detects resource when cursor is inside block body", function()
     helpers.with_temp_buffer({
       'resource "google_compute_instance" "default" {',
-      "  name         = \"example\"",
-      "  machine_type = \"e2-micro\"",
+      '  name         = "example"',
+      '  machine_type = "e2-micro"',
       "}",
     }, { 3, 2 }, function()
       local block = parser.parse_block()
@@ -39,8 +39,8 @@ describe("tf.parser.parse_block", function()
   it("detects data block", function()
     helpers.with_temp_buffer({
       'data "azurerm_virtual_network" "vnet" {',
-      "  name                = \"production\"",
-      "  resource_group_name = \"networking\"",
+      '  name                = "production"',
+      '  resource_group_name = "networking"',
       "}",
     }, { 2, 4 }, function()
       local block = parser.parse_block()
@@ -55,9 +55,9 @@ describe("tf.parser.parse_block", function()
 
   it("returns nil when no block is found", function()
     helpers.with_temp_buffer({
-      "variable \"region\" {",
+      'variable "region" {',
       "  type    = string",
-      "  default = \"us-east-1\"",
+      '  default = "us-east-1"',
       "}",
     }, { 1, 0 }, function()
       local block = parser.parse_block()

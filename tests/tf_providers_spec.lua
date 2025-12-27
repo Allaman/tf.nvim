@@ -19,10 +19,7 @@ describe("tf.providers.construct_url", function()
     }
 
     local url = providers.construct_url(block)
-    assert.equals(
-      "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance",
-      url
-    )
+    assert.equals("https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance", url)
   end)
 
   it("builds data source URL with data-sources path", function()
@@ -47,10 +44,7 @@ describe("tf.providers.construct_url", function()
     }
 
     local url = providers.construct_url(block)
-    assert.equals(
-      "https://registry.terraform.io/providers/hashicorp/custom/latest/docs/resources/thing",
-      url
-    )
+    assert.equals("https://registry.terraform.io/providers/hashicorp/custom/latest/docs/resources/thing", url)
   end)
 
   it("uses merged provider namespace overrides", function()
@@ -65,9 +59,6 @@ describe("tf.providers.construct_url", function()
     }
 
     local url = providers.construct_url(block)
-    assert.equals(
-      "https://registry.terraform.io/providers/mycorp/custom/latest/docs/resources/feature",
-      url
-    )
+    assert.equals("https://registry.terraform.io/providers/mycorp/custom/latest/docs/resources/feature", url)
   end)
 end)

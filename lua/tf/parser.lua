@@ -119,10 +119,10 @@ function M.parse_block()
   end
 
   return {
-    type = block_type,           -- "resource" or "data"
+    type = block_type, -- "resource" or "data"
     resource_type = resource_type, -- "aws_instance"
-    provider = provider,           -- "aws"
-    resource_name = resource_name  -- "instance"
+    provider = provider, -- "aws"
+    resource_name = resource_name, -- "instance"
   }
 end
 

@@ -7,7 +7,7 @@ describe("tf.parser edge cases", function()
       '# resource "aws_instance" "commented"',
       "",
       'resource "aws_s3_bucket" "real" {',
-      "  bucket = \"my-bucket\"",
+      '  bucket = "my-bucket"',
       "}",
     }, { 4, 0 }, function()
       local block = parser.parse_block()
@@ -39,7 +39,7 @@ describe("tf.parser edge cases", function()
   it("handles multi-part provider names", function()
     helpers.with_temp_buffer({
       'resource "google_compute_instance" "vm" {',
-      "  name = \"test-vm\"",
+      '  name = "test-vm"',
       "}",
     }, { 2, 0 }, function()
       local block = parser.parse_block()
@@ -53,7 +53,7 @@ describe("tf.parser edge cases", function()
   it("does not match resource inside heredoc", function()
     helpers.with_temp_buffer({
       'resource "null_resource" "script" {',
-      "  provisioner \"local-exec\" {",
+      '  provisioner "local-exec" {',
       "    command = <<-EOF",
       '      # resource "fake_resource" "trap"',
       "    EOF",
@@ -71,11 +71,11 @@ describe("tf.parser edge cases", function()
   it("validates cursor is within block boundaries", function()
     helpers.with_temp_buffer({
       'resource "aws_instance" "web" {',
-      "  ami = \"ami-123\"",
+      '  ami = "ami-123"',
       "}",
       "",
       'resource "aws_s3_bucket" "data" {',
-      "  bucket = \"my-data\"",
+      '  bucket = "my-data"',
       "}",
     }, { 4, 0 }, function()
       -- Cursor on empty line between blocks
@@ -93,7 +93,7 @@ describe("tf.parser edge cases", function()
   it("handles nested blocks correctly", function()
     helpers.with_temp_buffer({
       'resource "aws_instance" "web" {',
-      "  dynamic \"ebs_block_device\" {",
+      '  dynamic "ebs_block_device" {',
       "    for_each = var.disks",
       "    content {",
       "      device_name = ebs_block_device.value",
@@ -112,7 +112,7 @@ describe("tf.parser edge cases", function()
   it("handles cursor on closing brace", function()
     helpers.with_temp_buffer({
       'resource "aws_instance" "web" {',
-      "  ami = \"ami-123\"",
+      '  ami = "ami-123"',
       "}",
     }, { 3, 0 }, function()
       local block = parser.parse_block()
@@ -125,7 +125,7 @@ describe("tf.parser edge cases", function()
   it("returns nil for module blocks", function()
     helpers.with_temp_buffer({
       'module "vpc" {',
-      "  source = \"./modules/vpc\"",
+      '  source = "./modules/vpc"',
       "}",
     }, { 2, 0 }, function()
       local block = parser.parse_block()
@@ -172,7 +172,7 @@ describe("tf.parser edge cases", function()
   it("handles extra whitespace in declaration", function()
     helpers.with_temp_buffer({
       '  resource   "aws_instance"   "web"   {',
-      "    ami = \"ami-123\"",
+      '    ami = "ami-123"',
       "  }",
     }, { 2, 0 }, function()
       local block = parser.parse_block()
