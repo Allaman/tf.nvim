@@ -36,6 +36,8 @@ A Neovim plugin for
   - Delete resources from state with confirmation dialog
 - Run `terraform validate` without leaving Neovim
 
+This plugin is not a replacement for an LSP and syntax features.
+
 ## Installation
 
 ```lua
