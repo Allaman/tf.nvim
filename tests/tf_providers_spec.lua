@@ -61,4 +61,18 @@ describe("tf.providers.construct_url", function()
     local url = providers.construct_url(block)
     assert.equals("https://registry.terraform.io/providers/mycorp/custom/latest/docs/resources/feature", url)
   end)
+
+  it("handle google_project_iam special case", function()
+    local block = {
+      type = "resource",
+      provider = "google",
+      resource_name = "google_project_iam_member",
+    }
+
+    local url = providers.construct_url(block)
+    assert.equals(
+      "https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_project_iam",
+      url
+    )
+  end)
 end)

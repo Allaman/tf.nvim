@@ -32,6 +32,10 @@ M.providers = {
   databricks = { namespace = "databricks" },
 }
 
+M.exceptions = {
+  google_project_iam = { provider = "google", sarch_term = "project_iam", overwrite = "google_project_iam" },
+}
+
 --- Get provider configuration
 --- @param provider string
 --- @return table|nil
@@ -52,6 +56,23 @@ local function get_doc_type_path(block_type)
   end
 end
 
+--- Handle exceptions
+--- @param resource string
+--- @param provider string
+--- @return string|nil
+local function handle_exceptions(resource, provider)
+  for _, config in pairs(M.exceptions) do
+    -- find if resource needs an exception
+    if string.find(resource, config.sarch_term) then
+      -- check if resource and exception provider match
+      if provider == config.provider then
+        return config.overwrite
+      end
+    end
+  end
+  return nil
+end
+
 --- Construct documentation URL for a Terraform resource or data source
 --- @param block table -- Parsed block info from parser
 --- @return string|nil
@@ -65,13 +86,15 @@ function M.construct_url(block)
 
   local doc_type = get_doc_type_path(block.type)
 
+  local resource_name = handle_exceptions(block.resource_name, block.provider) or block.resource_name
+
   -- Construct URL following Terraform Registry pattern
   return string.format(
     "https://registry.terraform.io/providers/%s/%s/latest/docs/%s/%s",
     namespace,
     block.provider,
     doc_type,
-    block.resource_name
+    resource_name
   )
 end
 
