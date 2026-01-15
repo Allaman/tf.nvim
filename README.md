@@ -64,11 +64,11 @@ This plugin is not a replacement for an LSP and syntax features.
 
 - `:TerraformState` - Open interactive state viewer
 
-**State Management:**
+![ts-state.png](https://s12.gifyu.com/images/bhMLh.png)
+
+**Validation:**
 
 - `:TerraformValidate` - Run `terraform validate` in the detected project root
-
-![ts-state.png](https://s12.gifyu.com/images/bhMLh.png)
 
 ### Terraform Documentation
 
@@ -101,11 +101,11 @@ Run `:TerraformState` from any directory containing Terraform files. This opens 
 #### Example Workflow
 
 1. Run `:TerraformState`
-1. Navigate to a resource using `j/k`
-1. `f` to filter resources (if needed)
-1. Press `<Enter>` to view details in a split
-1. Press d to delete (if needed) with confirmation
-1. Press q to close
+2. Navigate to a resource using `j/k`
+3. `f` to filter resources (if needed)
+4. Press `<Enter>` to view details in a split
+5. Press d to delete (if needed) with confirmation
+6. Press q to close
 
 ## Configuration
 
