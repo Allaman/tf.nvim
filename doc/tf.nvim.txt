@@ -63,7 +63,7 @@ COMMANDS ~
 
 - `:TerraformState` - Open interactive state viewer
 
-**State Management:**
+**Validation:**
 
 - `:TerraformValidate` - Run `terraform validate` in the detected project root
 
