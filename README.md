@@ -207,21 +207,34 @@ vim.keymap.set("n", "<leader>tv", ":TerraformValidate<cr>", { desc = "Terraform 
 
 ## Supported Providers
 
-The plugin includes built-in support for:
+The plugin includes built-in support for the following providers. For any provider not listed, the plugin defaults to the `hashicorp` namespace. You can add or override providers via configuration.
 
-### HashiCorp Official
-
-- aws, azurerm, azuread, google, kubernetes, helm
-- random, null, template, local, tls
-- vault, consul, nomad
-
-### Community Providers
-
-- datadog, cloudflare, digitalocean
-- mongodbatlas, github, gitlab
-- auth0, okta, snowflake, databricks
-
-For providers not in the list, the plugin will default to the `hashicorp` namespace. You can add custom providers via configuration.
+| Provider     | Namespace      |
+| ------------ | -------------- |
+| auth0        | auth0          |
+| aws          | hashicorp      |
+| azuread      | hashicorp      |
+| azurerm      | hashicorp      |
+| cloudflare   | cloudflare     |
+| consul       | hashicorp      |
+| databricks   | databricks     |
+| datadog      | DataDog        |
+| digitalocean | digitalocean   |
+| github       | integrations   |
+| gitlab       | gitlabhq       |
+| google       | hashicorp      |
+| helm         | hashicorp      |
+| kubernetes   | hashicorp      |
+| local        | hashicorp      |
+| mongodbatlas | mongodb        |
+| nomad        | hashicorp      |
+| null         | hashicorp      |
+| okta         | okta           |
+| random       | hashicorp      |
+| snowflake    | Snowflake-Labs |
+| template     | hashicorp      |
+| tls          | hashicorp      |
+| vault        | hashicorp      |
 
 ## Requirements
 
