@@ -1,7 +1,11 @@
+---@class tf.ProviderOverride
+---@field provider string
+---@field sarch_term string
+---@field overwrite string
+
 local M = {}
 
--- Provider configuration with namespace information
--- Users can extend this via setup()
+--- @type table<string, tf.Provider>
 M.providers = {
   -- HashiCorp official providers
   aws = { namespace = "hashicorp" },
@@ -32,13 +36,14 @@ M.providers = {
   databricks = { namespace = "databricks" },
 }
 
+--- @type table<string, tf.ProviderOverride>
 M.exceptions = {
   google_project_iam = { provider = "google", sarch_term = "project_iam", overwrite = "google_project_iam" },
 }
 
 --- Get provider configuration
 --- @param provider string
---- @return table|nil
+--- @return tf.Provider|nil
 local function get_provider_config(provider)
   return M.providers[provider]
 end
@@ -100,13 +105,13 @@ end
 
 --- Add or update a custom provider
 --- @param provider string
---- @param config table
+--- @param config tf.Provider
 function M.add_provider(provider, config)
   M.providers[provider] = config
 end
 
 --- Merge user-provided providers with defaults
---- @param user_providers table
+--- @param user_providers table<string, tf.Provider>
 function M.merge_providers(user_providers)
   if not user_providers then
     return
