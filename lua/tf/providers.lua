@@ -38,7 +38,39 @@ M.providers = {
 
 --- @type table<string, tf.ProviderOverride>
 M.exceptions = {
-  google_project_iam = { provider = "google", sarch_term = "project_iam", overwrite = "google_project_iam" },
+  -- google_project_iam_member and _binding/_policy all share one doc page
+  google_project_iam_member  = { provider = "google", sarch_term = "project_iam_member",  overwrite = "google_project_iam" },
+  google_project_iam_binding = { provider = "google", sarch_term = "project_iam_binding", overwrite = "google_project_iam" },
+  google_project_iam_policy  = { provider = "google", sarch_term = "project_iam_policy",  overwrite = "google_project_iam" },
+}
+
+-- Google provider docs are inconsistent: some resource/data-source doc pages are
+-- prefixed with "google_" in the URL, others are not.
+-- See https://github.com/hashicorp/terraform-provider-google/issues/25684
+-- These are the known affected resource_names (after stripping the "google_" provider prefix).
+local google_prefixed = {
+  billing_subaccount = true,
+  folder = true,
+  folder_iam = true,
+  folder_organization_policy = true,
+  kms_crypto_key_iam = true,
+  kms_key_ring_iam = true,
+  organization_iam = true,
+  organization_iam_custom_role = true,
+  organization_policy = true,
+  project = true,
+  project_default_service_accounts = true,
+  project_iam = true,
+  project_iam_custom_role = true,
+  project_iam_member_remove = true,
+  project_organization_policy = true,
+  project_service = true,
+  service_account = true,
+  service_account_iam = true,
+  service_account_key = true,
+  service_networking_peered_dns_domain = true,
+  tags_location_tag_binding = true,
+  vertex_ai_index = true, -- data source only
 }
 
 --- Get provider configuration
@@ -67,14 +99,15 @@ end
 --- @return string|nil
 local function handle_exceptions(resource, provider)
   for _, config in pairs(M.exceptions) do
-    -- find if resource needs an exception
-    if string.find(resource, config.sarch_term) then
-      -- check if resource and exception provider match
-      if provider == config.provider then
-        return config.overwrite
-      end
+    if resource == config.sarch_term and provider == config.provider then
+      return config.overwrite
     end
   end
+
+  if provider == "google" and google_prefixed[resource] then
+    return "google_" .. resource
+  end
+
   return nil
 end
 
