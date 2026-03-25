@@ -222,9 +222,9 @@ function StateViewer:open_window(bufnr)
   self.winid = util.create_window(bufnr, window_cfg)
 
   if self.winid and vim.api.nvim_win_is_valid(self.winid) then
-    vim.api.nvim_set_option_value("number", true, { win = self.winid })
-    vim.api.nvim_set_option_value("relativenumber", false, { win = self.winid })
-    vim.api.nvim_set_option_value("cursorline", true, { win = self.winid })
+    vim.wo[self.winid][0].number = true
+    vim.wo[self.winid][0].relativenumber = false
+    vim.wo[self.winid][0].cursorline = true
   end
 end
 
@@ -247,8 +247,9 @@ function StateViewer:show_resource_detail()
 
     vim.schedule(function()
       vim.cmd("split")
+      local detail_winid = vim.api.nvim_get_current_win()
       local detail_bufnr = vim.api.nvim_create_buf(false, true)
-      vim.api.nvim_win_set_buf(0, detail_bufnr)
+      vim.api.nvim_win_set_buf(detail_winid, detail_bufnr)
 
       vim.api.nvim_set_option_value("buftype", "nofile", { buf = detail_bufnr })
       vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = detail_bufnr })
@@ -266,12 +267,12 @@ function StateViewer:show_resource_detail()
       local detail_opts = detail_config()
       if detail_opts.folds then
         local method = detail_opts.foldmethod or "indent"
-        vim.api.nvim_set_option_value("foldmethod", method, { win = 0 })
-        vim.api.nvim_set_option_value("foldenable", true, { win = 0 })
-        vim.api.nvim_set_option_value("foldlevel", 0, { win = 0 })
+        vim.wo[detail_winid][0].foldmethod = method
+        vim.wo[detail_winid][0].foldenable = true
+        vim.wo[detail_winid][0].foldlevel = 0
         vim.cmd("normal! zM")
       else
-        vim.api.nvim_set_option_value("foldenable", false, { win = 0 })
+        vim.wo[detail_winid][0].foldenable = false
       end
 
       vim.api.nvim_buf_set_keymap(detail_bufnr, "n", "q", ":close<CR>", {
