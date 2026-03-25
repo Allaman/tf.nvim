@@ -39,9 +39,21 @@ M.providers = {
 --- @type table<string, tf.ProviderOverride>
 M.exceptions = {
   -- google_project_iam_member and _binding/_policy all share one doc page
-  google_project_iam_member  = { provider = "google", sarch_term = "project_iam_member",  overwrite = "google_project_iam" },
-  google_project_iam_binding = { provider = "google", sarch_term = "project_iam_binding", overwrite = "google_project_iam" },
-  google_project_iam_policy  = { provider = "google", sarch_term = "project_iam_policy",  overwrite = "google_project_iam" },
+  google_project_iam_member = {
+    provider = "google",
+    sarch_term = "project_iam_member",
+    overwrite = "google_project_iam",
+  },
+  google_project_iam_binding = {
+    provider = "google",
+    sarch_term = "project_iam_binding",
+    overwrite = "google_project_iam",
+  },
+  google_project_iam_policy = {
+    provider = "google",
+    sarch_term = "project_iam_policy",
+    overwrite = "google_project_iam",
+  },
 }
 
 -- Google provider docs are inconsistent: some resource/data-source doc pages are
