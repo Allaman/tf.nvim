@@ -43,6 +43,8 @@ This plugin is not a replacement for an LSP and syntax features.
 ```lua
 {
   "allaman/tf.nvim",
+  ---@module "tf"
+  ---@type tf.ConfigPartial
   opts = {},
   ft = "terraform"
 }

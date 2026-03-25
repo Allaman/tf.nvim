@@ -1,3 +1,86 @@
+---@class tf.Provider
+---@field namespace string
+
+---@class tf.Config.terraform
+---@field bin string
+
+---@class tf.Config.doc
+---@field browser_command string|nil
+---@field default_action string
+---@field providers table<string, tf.Provider>
+
+---@class tf.Config.state.filter
+---@field case_sensitive boolean
+
+---@class tf.Config.state.detail
+---@field folds boolean
+---@field foldmethod string
+
+---@class tf.Config.state.window.split
+---@field position string
+---@field size number
+
+---@class tf.Config.state.window.float
+---@field width number
+---@field height number
+
+---@class tf.Config.state.window
+---@field mode string
+---@field split tf.Config.state.window.split
+---@field float tf.Config.state.window.float
+---@field focus boolean
+
+---@class tf.Config.state
+---@field filter tf.Config.state.filter
+---@field detail tf.Config.state.detail
+---@field window tf.Config.state.window
+
+---@class tf.Config
+---@field filetypes string[]
+---@field terraform tf.Config.terraform
+---@field doc tf.Config.doc
+---@field state tf.Config.state
+
+---@class tf.Config.terraform.Partial
+---@field bin? string
+
+---@class tf.Config.doc.Partial
+---@field browser_command? string|nil
+---@field default_action? string
+---@field providers? table<string, tf.Provider>
+
+---@class tf.Config.state.filter.Partial
+---@field case_sensitive? boolean
+
+---@class tf.Config.state.detail.Partial
+---@field folds? boolean
+---@field foldmethod? string
+
+---@class tf.Config.state.window.split.Partial
+---@field position? string
+---@field size? number
+
+---@class tf.Config.state.window.float.Partial
+---@field width? number
+---@field height? number
+
+---@class tf.Config.state.window.Partial
+---@field mode? string
+---@field split? tf.Config.state.window.split.Partial
+---@field float? tf.Config.state.window.float.Partial
+---@field focus? boolean
+
+---@class tf.Config.state.Partial
+---@field filter? tf.Config.state.filter.Partial
+---@field detail? tf.Config.state.detail.Partial
+---@field window? tf.Config.state.window.Partial
+
+---@class tf.ConfigPartial
+---@field filetypes? string[]
+---@field terraform? tf.Config.terraform.Partial
+---@field doc? tf.Config.doc.Partial
+---@field state? tf.Config.state.Partial
+
 local defaults = {
   filetypes = { "terraform", "tf", "terraform-vars", "tfvars", "hcl" },
   terraform = {
@@ -90,7 +173,7 @@ local function validate_config(opts)
 end
 
 --- Get the current configuration table.
---- @return table
+--- @return tf.Config
 function M.get()
   return config
 end
@@ -108,7 +191,8 @@ function M.reset()
 end
 
 --- Merge user options into the configuration.
---- @param opts table|nil
+--- @param opts tf.ConfigPartial|nil
+--- @return tf.Config
 function M.extend(opts)
   if not opts then
     return config
@@ -124,7 +208,7 @@ function M.extend(opts)
 end
 
 --- Access the default configuration table.
---- @return table
+--- @return tf.Config
 function M.defaults()
   return vim.deepcopy(defaults)
 end

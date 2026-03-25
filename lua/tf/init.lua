@@ -17,7 +17,7 @@ end
 M.config = Config.get()
 
 --- Setup function for plugin configuration
---- @param opts table|nil
+--- @param opts tf.ConfigPartial|nil
 M.setup = function(opts)
   opts = opts or {}
 
