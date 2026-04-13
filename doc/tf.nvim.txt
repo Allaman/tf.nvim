@@ -1,4 +1,5 @@
 *tf.nvim.txt*               Neovim plugin to enhance the Terraform experience.
+                             For Neovim >= v0.11    Last change: 2026 April 13
 
 ==============================================================================
 Table of Contents                                  *tf.nvim-table-of-contents*
@@ -164,7 +165,7 @@ Configure the default action and browser command:
 
 TERRAFORM CLI CONFIGURATION ~
 
-Override Terraform binary (e.g. when not in PATH)
+Override Terraform binary (e.g. when not in PATH)
 
 >lua
     require("tf").setup({
