@@ -51,18 +51,18 @@ local function ensure_install(repo)
   vim.opt.runtimepath:prepend(install_path)
 end
 
-local plenary_path = os.getenv("PLENARY_PATH")
+local mini_path = os.getenv("MINI_PATH")
 
-if plenary_path and plenary_path ~= "" then
-  vim.opt.runtimepath:append(plenary_path)
+if mini_path and mini_path ~= "" then
+  vim.opt.runtimepath:append(mini_path)
 else
-  local ok = pcall(vim.cmd, "packadd plenary.nvim")
+  local ok = pcall(vim.cmd, "packadd mini.nvim")
   if not ok then
-    ensure_install("nvim-lua/plenary.nvim")
+    ensure_install("echasnovski/mini.nvim")
   end
 end
 
 vim.opt.swapfile = false
 vim.opt.shadafile = "NONE"
 
-pcall(require, "plenary.busted")
+require("mini.test").setup()
