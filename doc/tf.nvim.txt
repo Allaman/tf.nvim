@@ -1,5 +1,5 @@
 *tf.nvim.txt*               Neovim plugin to enhance the Terraform experience.
-                             For Neovim >= v0.11    Last change: 2026 April 13
+                             For Neovim >= v0.11    Last change: 2026 April 14
 
 ==============================================================================
 Table of Contents                                  *tf.nvim-table-of-contents*
